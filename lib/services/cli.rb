@@ -52,9 +52,15 @@ class Cli
         puts "Or type 'exit' to end progam"
         breed_details_menu
     end
-
+    
     def print_breed_details(breed)
-        # puts "affection type: # {breed.affection}"
+        puts ""
+        puts "name: #{breed.name}"
+        puts "affection type: #{breed.affection}"
+        puts "shedding_level: #{breed.shedding_level}"
+        puts "origin: #{breed.origin}"
+        puts "temperament: #{breed.temperament}"
+        puts ""
         # puts "shedding_level
         # name, :affection, :shedding_level, :origin, :temperament
         
@@ -64,8 +70,13 @@ class Cli
         input = get_input
 
         if input.to_i.between?(1, Breed.all.length)
-            print_breed_details(input)
-            # select_again_or_exit
+            index = input.to_i - 1
+            breed = Breed.all[index]
+            print_breed_details(breed)
+            main_menu_options
+        elsif input == "exit"
+            puts "Exiting, goodbye!"
+            exit
         else
             invaild_choice
             breed_details_menu_options
